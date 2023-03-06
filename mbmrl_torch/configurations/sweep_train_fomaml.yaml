@@ -1,0 +1,35 @@
+program: mbmrl_torch/launcher/run.py
+method: bayes
+project: SWEEP_FOMAML_train
+metric:
+  name: mean_loss_across_tasks
+  goal: minimize
+parameters:
+  fomaml.meta_step:
+    values: [2.9,3.0,2.5, 2.6, 2.7, 2.8, 2.4, 2.3, 2.2, 2.1, 2.0, 1.9, 1.8, 1.6, 1.5, 1.4, 1.3, 1.2, 1.1, 1.0]
+  fomaml.inner_iter:
+    min: 10
+    max: 50
+  fomaml.inner_step:
+    values: [0.001, 0.002, 0.003, 0.0009, 0.0008, 0.0007, 0.0006, 0.0005, 0.0004, 0.0003, 0.0002, 0.0001, 0.00009, 0.00008, 0.00007, 0.00006, 0.00005, 0.00004, 0.00003, 0.00002, 0.00001]
+  fomaml.dropout:
+    values: [0.1,0.0,0.05,0.0,0.025,0.15,0.075]
+  fomaml.hidden_activation:
+    distribution: categorical
+    values: 
+    - relu
+    - silu
+    - leaky_relu
+
+command:
+  - ${env}
+  - ${interpreter}
+  - ${program}
+  - +fomaml/stored_configs=train_halfcheetah_cripple
+  - ++general.experiment=train_sweep
+  - ++general.learning_alg=fomaml
+  - ++fomaml.meta_iter=100000
+  - ++fomaml.model_data=null
+  - ${args_no_hyphens}
+
+#wandb sweep mbmrl_torch/configurations/sweep_train_fomaml.yaml

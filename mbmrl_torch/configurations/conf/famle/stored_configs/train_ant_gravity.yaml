@@ -1,0 +1,46 @@
+# @package _global_
+defaults:
+  - override /general: famle_train
+famle:
+  env_name: "AntGravity-v1"
+  seed: 42
+  exp_details: ""
+  log_embedding_data: False
+  
+  #experiment data
+  task_data: null
+  model_data: null
+
+  #Environment, data storage, experiment results sotrage
+  result_dir: "mbmrl_torch_data/data/experiment_results/train_test_FAMLE"
+  model_data_dir: "mbmrl_torch_data/data/model_data/train_test_FAMLE"
+  task_data_dir: "mbmrl_torch_data/data/task_data/train_test_FAMLE/"
+  model_name: "AntGravity_FAMLE_new"
+
+  #tasks settings and data collection
+  episode_length: 1000
+  rollouts: 100
+  n_tasks_distribution: 17
+  reset_env_when_done: True
+
+  #Model Parameters - Offline Meta Learning
+  hidden_layers: [512,512,512]
+  hidden_activation: "silu"
+  embedding_size: 2
+  cuda: True
+  output_limit: null
+  dropout: 0.05
+
+  #Meta Learning Parameters: FAMLE
+  meta_iter: 100000
+  meta_iter_reward: 100
+  meta_step: 0.9
+  lr_schedule: True
+  inner_iter: 197
+  inner_step: 0.001
+  meta_batch_size: 32
+  inner_sample_size: 500
+  meta_train_test_split: 0.8
+  save_meta_model: True
+
+#python3 mbmrl_torch/launcher/run.py +famle/stored_configs=train_ant_gravity

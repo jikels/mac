@@ -1,0 +1,44 @@
+# @package _global_
+defaults:
+  - override /general: fomaml_test
+
+fomaml:
+  #general
+  env_name: "HalfCheetahCripple-v1"
+  seed: 42
+  exp_details: ""
+
+  #experiment data
+  task_data: "mbmrl_torch/configurations/task_config/task_stats/HCCripple"
+  model_data: "mbmrl_torch/configurations/trained_models/HCCripple_FOMAML.pt"
+
+  #Model Parameters - Online Model Adaption
+  epoch: 198
+  learning_rate: 0.0004
+  minibatch_size: 11
+  ensemble: 1
+
+  #online adaption (meta testing)
+  iterations: 2
+  sample_new_task_after_n_iter: 1
+  episode_steps: 500
+  m_observations: 14
+  reset_during_online_adaption: False
+  reset_after_x_steps: 500 
+  record_video: False
+
+  # Parameters of MPC Controller - Random Action Sampling
+  controller_type: "mpc"
+  mpc_type: "normal"
+  horizon: 22
+  lb: -1
+  ub: 1
+  popsize: 4096
+  discount: 0.99
+
+  #Parameters of MPC Controller - CEM Action Sampling
+  use_CEM: False
+  elites: 0.1
+  alpha: 0.2
+
+# python3 mbmrl_torch/launcher/run.py +fomaml/stored_configs=test_mpc_halfcheetah_cripple

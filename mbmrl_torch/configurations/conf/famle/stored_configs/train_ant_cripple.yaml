@@ -1,0 +1,46 @@
+# @package _global_
+defaults:
+  - override /general: famle_train
+famle:
+  env_name: "AntCripple-v1"
+  seed: 42
+  exp_details: ""
+  log_embedding_data: False
+
+  #experiment data
+  task_data: null
+  model_data: null
+
+  #Environment, data storage, experiment results sotrage
+  result_dir: "mbmrl_torch_data/data/experiment_results/train_test_FAMLE"
+  model_data_dir: "mbmrl_torch_data/data/model_data/train_test_FAMLE"
+  task_data_dir: "mbmrl_torch_data/data/task_data/train_test_FAMLE/"
+  model_name: "AntCripple_FAMLE_new"
+
+  #tasks settings and data collection
+  load_task_presets: True
+  collection_policy: null
+  episode_length: 500
+  rollouts: 600
+  n_tasks_distribution: 6
+  reset_env_when_done: True #default is True
+
+  #Model Parameters - Offline Meta Learning
+  hidden_layers: [512,512,512]
+  hidden_activation: "relu"
+  embedding_size: 8
+  cuda: True
+  output_limit: null
+  dropout: 0
+
+  #Meta Learning Parameters: FAMLE
+  meta_iter: 100000
+  meta_iter_reward: 100
+  meta_step: 0.5
+  lr_schedule: True
+  inner_iter: 193
+  inner_step: 0.003
+  meta_batch_size: 32
+  save_meta_model: True
+
+#python3 mbmrl_torch/launcher/run.py +famle/stored_configs=train_ant_cripple

@@ -1,0 +1,85 @@
+# MOST OF THE BELOW PARAMS WILL BE OVERWRITTEN BY STORED_CONFIGS!
+#general
+wandb_entity: null
+env_name: "HalfCheetahCripple-v1"
+seed: 42
+exp_details: ""
+
+#experiment data
+task_data: null
+model_data: null
+
+#Environment, data storage, experiment results storage
+result_dir: "mbmrl_torch/experiments/train_test_FOMAML"
+model_data_dir: "mbmrl_torch/experiments/train_test_FOMAML"
+task_data_dir: "mbmrl_torch/experiments/train_test_FOMAML/"
+model_name: "meta_dynamics_model_fomaml"
+
+#tasks settings and data collection
+load_task_presets: True
+collection_policy: null
+episode_length: 1000
+rollouts: 100
+n_tasks_distribution: null
+reset_env_when_done: True #default is True
+
+#Model Parameters - Offline Meta Learning
+hidden_layers: [512,512,512]
+hidden_activation: "silu"
+cuda: True
+output_limit: null
+dropout: 0.0
+
+#Meta Learning Parameters: FOMAML
+meta_iter: 2000
+meta_iter_reward: 100
+meta_step: 1.9
+lr_schedule: True
+inner_iter: 43
+inner_step: 0.003
+meta_batch_size: 32
+inner_sample_size: 500
+meta_train_test_split: 0.8
+save_meta_model: True
+
+#Model Parameters - Online Model Adaption
+epoch: 5
+learning_rate: 0.00001
+minibatch_size: 32
+ensemble: 1 #1 if no ensemble
+
+#online adaption (meta testing)
+iterations: 2
+sample_new_task_after_n_iter: 1
+episode_steps: 200 
+m_observations: 15
+reset_during_online_adaption: False
+reset_after_x_steps: 500 
+record_video: False
+
+# Parameters of MPC Controller - Random Action Sampling
+controller_type: "mpc"
+mpc_type: "normal"
+horizon: 16
+lb: -1
+ub: 1
+popsize: 4096
+discount: 0.99
+
+#Parameters of MPC Controller - CEM Action Sampling
+use_CEM: True
+elites: 0.1
+alpha: 0.5
+
+#parameters that will we adjusted automatically / DON NOT CHANGE!
+#general
+exp_name: ""
+exp_resdir: ""
+#training
+state_dim: 1
+action_dim: 1
+dim_in: 4 
+dim_out: 2
+dim_out_reward: 1
+#controller 
+sol_dim: 20

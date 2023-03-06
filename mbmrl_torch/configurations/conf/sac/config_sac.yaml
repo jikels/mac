@@ -1,0 +1,47 @@
+#general
+env_name: null
+seed: null
+exp_details: null
+
+#experiment data
+task_data: null
+model_data: null
+
+#Environment, data storage, experiment results storage
+result_dir: null
+model_data_dir: null
+model_name: null
+
+#Model Parameters - Learning
+hidden_sizes: null
+cuda: null
+
+#Learning Parameters
+epochs: null
+steps_per_epoch: null
+max_ep_len: null
+replay_size: null
+gamma: null
+polyak: null
+lr: null
+alpha_lr: null
+alpha: null
+batch_size: null
+start_steps: null
+update_after: null
+update_every: null
+gradient_steps: null
+num_test_episodes: null
+save_freq: null
+
+#parameters that will we adjusted automatically / DO NOT CHANGE!
+#general
+exp_name: null
+exp_resdir: null
+#training
+action_dim: null
+state_dim: null
+dim_in: null 
+dim_out: null
+dim_out_reward: null
+#controller

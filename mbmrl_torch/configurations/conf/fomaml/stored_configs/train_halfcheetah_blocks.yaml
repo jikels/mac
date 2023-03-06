@@ -1,0 +1,46 @@
+# @package _global_
+defaults:
+  - override /general: fomaml_train
+fomaml:
+  env_name: "HalfCheetahBlocks-v1"
+  seed: 42
+  exp_details: ""
+
+  log_embedding_data: False
+  #experiment data
+  task_data: null
+  model_data: null
+
+  #Environment, data storage, experiment results sotrage
+  result_dir: "mbmrl_torch_data/data/experiment_results/train_test_FOMAML"
+  model_data_dir: "mbmrl_torch_data/data/model_data/train_test_FOMAML"
+  task_data_dir: "mbmrl_torch_data/data/task_data/train_test_FOMAML/"
+  model_name: "HCBlocks_FOMAML_new"
+
+  #tasks settings and data collection
+  load_task_presets: True
+  collection_policy: null
+  episode_length: 500
+  rollouts: 400
+  n_tasks_distribution: 11
+  reset_env_when_done: True
+
+  #Model Parameters - Offline Meta Learning
+  hidden_layers: [512,512,512]
+  hidden_activation: "leaky_relu"
+  embedding_size: 4 #relevant for FAMLE - keep inconfig for evaluation
+  cuda: True
+  output_limit: null
+  dropout: 0
+
+  #Meta Learning Parameters: FOMAML
+  meta_iter: 100000
+  meta_iter_reward: 100
+  meta_step: 1.2
+  lr_schedule: True
+  inner_iter: 49
+  inner_step: 0.0006
+  meta_batch_size: 32
+  save_meta_model: True
+
+#python3 mbmrl_torch/launcher/run.py +fomaml/stored_configs=train_halfcheetah_blocks

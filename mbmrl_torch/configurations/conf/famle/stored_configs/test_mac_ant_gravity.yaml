@@ -1,0 +1,55 @@
+# @package _global_
+defaults:
+- override /general: famle_test
+
+famle:
+  #optimized params
+  beta: 2.1
+  m_observations: 23
+  epoch: 165
+  learning_rate: 0.004
+  horizon: 17
+  reference_task: 0
+
+  #other params relevant for meta testing
+  env_name: "AntGravity-v1"
+  mbmrl.famle.seed: 42
+  exp_details: ""
+
+  task_data: "mbmrl_torch/configurations/task_config/task_stats/AntGravity"
+  model_data: "mbmrl_torch/configurations/trained_models/AntGravity_FAMLE.pt"
+
+  #Model Parameters - Online Model Adaption
+  minibatch_size: 32
+  ensemble: 1
+  record_video: False
+
+  #online adaption (meta testing)
+  iterations: 8
+  sample_new_task_after_n_iter: 1
+  episode_steps: 500
+  adapt_based_on: "dynamics"
+  reset_during_online_adaption: False
+  reset_after_x_steps: 500
+
+  #FAMLE online adaption
+  sample_model: False
+  num_embeddings: 0
+  log_embedding_data: True
+
+  # Parameters of Controller
+  controller_type: "mac"
+  mac_elites: 512
+  mac_reference_policy: "mbmrl_torch/configurations/trained_models/AntGravity_SAC.zip"
+  mpc_type: "normal"
+  lb: -1
+  ub: 1
+  popsize: 8192
+  discount: 1.0
+
+  # Parameters of MPC Controller - CEM
+  use_CEM: True
+  elites: 0.1
+  alpha: 0.1
+
+  ##python3 mbmrl_torch/launcher/run.py +famle/stored_configs=test_mac_ant_gravity

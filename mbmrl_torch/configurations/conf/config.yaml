@@ -1,0 +1,7 @@
+defaults:
+  - general: general
+  - fomaml: config_fomaml
+  - famle: config_famle
+  - maml: config_maml
+  - mb_vanilla: config_mb_vanilla
+  - sac: config_sac

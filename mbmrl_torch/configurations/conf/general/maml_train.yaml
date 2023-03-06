@@ -1,0 +1,2 @@
+learning_alg: "maml" #famle, maml, fomaml, mb_vanilla
+experiment: "train" #"train_test","train", "test", train_sweep", "test_sweep"

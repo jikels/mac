@@ -1,0 +1,34 @@
+program: mbmrl_torch/launcher/run.py
+method: bayes
+project: SWEEP_FOMAML_test_mpc
+metric:
+  #name: average_reward_euler_range_ratio
+  name: average_reward_per_episode
+  goal: maximize
+parameters:
+  fomaml.epoch:
+    min: 50
+    max: 200
+  fomaml.learning_rate:
+    values: [0.00003, 0.00004, 0.00005, 0.00006, 0.00007, 0.00008, 0.00009, 0.00002, 0.00001, 0.000008, 0.000004, 0.000002, 0.000001,0.0001,0.0002, 0.0004, 0.0004, 0.0005,0.0006,0.0007, 0.0008, 0.0009, 0.001, 0.002, 0.003,0.005,0.004,0.008]
+  fomaml.horizon:
+    min: 10
+    max: 30
+  fomaml.m_observations:
+    min: 10
+    max: 30
+
+command:
+  - ${env}
+  - ${interpreter}
+  - ${program}
+  - +fomaml/stored_configs=test_mpc_anchor_ant_cripple
+  - ++general.experiment=test_sweep
+  - ++general.learning_alg=fomaml
+  - ++fomaml.iterations=5
+  - ++fomaml.episode_steps=500
+  - ++fomaml.mpc_type=normal
+  - ++fomaml.use_CEM=False
+  - ${args_no_hyphens}
+
+#wandb sweep mbmrl_torch/configurations/sweep_test_fomaml.yaml

@@ -1,0 +1,33 @@
+program: mbmrl_torch/launcher/run.py
+method: bayes
+project: SWEEP_FAMLE_test_mac
+metric:
+  name: average_reward_per_episode
+  goal: maximize
+parameters:
+  famle.epoch:
+    min: 50
+    max: 200
+  famle.learning_rate:
+    values: [0.00003, 0.00004, 0.00005, 0.00006, 0.00007, 0.00008, 0.00009, 0.00002, 0.00001, 0.000008, 0.000004, 0.000002, 0.000001,0.0001,0.0002, 0.0004, 0.0004, 0.0005,0.0006,0.0007, 0.0008, 0.0009, 0.001, 0.002, 0.003,0.005,0.004,0.008]
+  famle.horizon:
+    min: 10
+    max: 30
+  famle.m_observations:
+    min: 10
+    max: 30
+  famle.beta:
+    values: [2.0,1.9,1.8,1.7,1.6,1.5,1.4,1.3,1.2,1.1,1.0,0.9,0.8,0.7,0.6,0.5,0.4,0.3,0.2,0.1,2.1,2.2,2.3,2.4,2.5,2.6]
+
+command:
+  - ${env}
+  - ${interpreter}
+  - ${program}
+  - +famle/stored_configs=test_mac_halfcheetah_cripple
+  - ++general.experiment=test_sweep
+  - ++general.learning_alg=famle
+  - ++famle.iterations=2
+  - ++famle.episode_steps=500
+  - ${args_no_hyphens}
+
+#wandb sweep mbmrl_torch/configurations/sweep_test_mac.yaml

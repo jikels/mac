@@ -1,0 +1,74 @@
+#general
+env_name: null
+seed: null
+exp_details: null
+
+#experiment data
+task_data: null
+model_data: null
+
+#Environment, data storage, experiment results storage
+result_dir: null
+model_data_dir: null
+task_data_dir: null
+model_name: null
+
+#tasks settings and data collection
+episode_length: null
+rollouts: null
+n_tasks_distribution: null
+reset_env_when_done: null
+collection_policy: null
+
+#Model Parameters - Learning
+hidden_layers: null
+hidden_activation: null
+cuda: null
+output_limit: null
+dropout: null
+
+#Learning Parameters: mb_vanilla
+epochs: null
+learning_rate: null
+batch_size: null
+optimizer: null
+save_model: null
+weight_decay: null
+
+#online adaption (meta testing)
+
+iterations: null
+sample_new_task_after_n_iter: null
+episode_steps: null
+m_observations: null
+reset_during_online_adaption: null
+reset_after_x_steps: null
+record_video: null
+ensemble: null
+
+# Parameters of MPC Controller - Random Action Sampling
+controller_type: null
+mpc_type: null
+horizon: null
+lb: null
+ub: null
+popsize: null
+discount: null
+
+#Parameters of MPC Controller - CEM Action Sampling
+use_CEM: null
+elites: null
+alpha: null
+cem_iter: null
+
+#parameters that will we adjusted automatically / DO NOT CHANGE!
+#general
+exp_name: null
+exp_resdir: null
+#training
+action_dim: null
+dim_in: null
+dim_out: null
+dim_out_reward: null
+#controller 
+sol_dim: null

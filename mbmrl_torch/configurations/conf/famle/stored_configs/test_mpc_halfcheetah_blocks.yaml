@@ -1,0 +1,54 @@
+# @package _global_
+defaults:
+- override /general: famle_test
+
+famle:
+  #optimized params
+  beta: 0.3
+  m_observations: 12 
+  epoch: 137
+  learning_rate: 0.000008
+  horizon: 12
+
+  #other params relevant for meta testing
+  env_name: "HalfCheetahBlocks-v1"
+  mbmrl.famle.seed: 42
+  exp_details: ""
+
+  task_data: "mbmrl_torch/configurations/task_config/task_stats/HCBlocks"
+  model_data: "mbmrl_torch/configurations/trained_models/HCBlocks_FAMLE.pt"
+
+  #Model Parameters - Online Model Adaption
+  minibatch_size: 32
+  ensemble: 1
+  record_video: False
+
+  #online adaption (meta testing)
+  iterations: 2
+  sample_new_task_after_n_iter: 1
+  episode_steps: 500
+  adapt_based_on: "dynamics"
+  reset_during_online_adaption: False
+  reset_after_x_steps: 500
+
+  #FAMLE online adaption
+  sample_model: False
+  num_embeddings: 0
+  log_embedding_data: True
+
+  # Parameters of Controller
+  controller_type: "mpc"
+  mac_elites: 512
+  mac_reference_policy: null
+  mpc_type: "normal"
+  lb: -1
+  ub: 1
+  popsize: 8192
+  discount: 1.0
+
+  # Parameters of MPC Controller - CEM
+  use_CEM: False
+  elites: 0.1
+  alpha: 0.95
+
+  #python3 mbmrl_torch/launcher/run.py +famle/stored_configs=test_mpc_halfcheetah_blocks
